@@ -1,27 +1,26 @@
 import java.util.ArrayList;
 
 public class Waitress1 {
-	PancakeHouseMenu pancakeHouseMenu = new PancakeHouseMenu();
-	ArrayList breakfastItems = pancakeHouseMenu.getMenuItems();
+	PancakeHouseMenu pancakeHouseMenu;
+	DinerMenu1 dinerMenu;
 	
-	DinerMenu1 dinerMenu = new DinerMenu1();
-	MenuItem[] lunchItems = dinerMenu.getMenuItems();
-	
+	public Waitress1(PancakeHouseMenu pancakeHouseMenu, DinerMenu1 dinerMenu) {
+		this.pancakeHouseMenu = pancakeHouseMenu;
+		this.dinerMenu = dinerMenu;
+	}
+
 	void printMenu() {
-		for (int i = 0; i < breakfastItems.size(); i++) {
-			MenuItem menuItem = (MenuItem)breakfastItems.get(i);
-			System.out.println(menuItem.getName() + " ");
-			System.out.println(menuItem.getPrice() + " ");
-			System.out.println(menuItem.getDescription() + " ");
+		Iterator dinerIterator = pancakeHouseMenu.createIterator();
+		System.out.println("MENU\n----\nBREAKFAST");
+		printMenu(dinerIterator);
+	}
+	
+	private void printMenu(Iterator iterator) {
+		while (iterator.hasNext()) {
+			MenuItem menuItem = (MenuItem)iterator.next();
+			System.out.print(menuItem.getName() + ", ");
+			System.out.print(menuItem.getPrice() + " -- ");
+			System.out.println(menuItem.getDescription());
 		}
-		
-		for (int i = 0; i < lunchItems.length; i++) {
-			MenuItem menuItem = lunchItems[i];
-			System.out.println(menuItem.getName() + " ");
-			System.out.println(menuItem.getPrice() + " ");
-			System.out.println(menuItem.getDescription() + " ");
-		}
-		
-		
 	}
 }
